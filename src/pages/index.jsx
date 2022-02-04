@@ -1,6 +1,5 @@
 import {graphql, Link, useStaticQuery} from 'gatsby';
 import React from 'react';
-
 import Layout from '../components/Layout';
 
 const Title = ({title}) => (
@@ -41,25 +40,26 @@ const Main = () => {
     `
   );
 
-  const result = nodes.reduce((acc, {frontmatter: {category, date, title} = {}, id, slug}) => {
-    console.log(category);
-    if (acc[category] === undefined) {
-      acc[category] = [];
-    }
-    acc[category].push({
+  const categories = {
+    Essay: [],
+    DeepDive: [],
+    Book: [],
+  };
+
+  nodes.forEach(({frontmatter: {category, date, title} = {}, id, slug}) => {
+    categories[category].push({
       date,
       category,
       title,
       id,
       slug,
     });
-    return acc;
-  }, {});
+  });
 
   return (
     <Layout>
       <section className="list">
-        {Object.entries(result).map(([key, value]) => (
+        {Object.entries(categories).map(([key, value]) => (
           <ListWrapper key={key}>
             <Title title={key} />
             <>

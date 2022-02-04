@@ -1,12 +1,12 @@
 module.exports = {
   siteMetadata: {
     title: `Stevy's wavyLog`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://www.stevy.dev`,
+    description: `Stevy의 개발 블로그 입니다.`,
   },
   plugins: [
     `gatsby-plugin-sass`,
     'gatsby-plugin-image',
-    'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',
@@ -20,39 +20,51 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: './src/images/',
+        path: `${__dirname}/src/images/`,
       },
-      __key: 'images',
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'pages',
-        path: './src/pages/',
+        path: `${__dirname}/src/pages/`,
       },
-      __key: 'pages',
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `blog`,
-        path: `./src/blog/`,
+        name: `posts`,
+        path: `${__dirname}/src/posts/`,
       },
     },
-    'gatsby-plugin-mdx',
+    {
+      resolve: 'gatsby-plugin-page-creator',
+      options: {
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      extensions: ['mdx', 'md'],
+      options: {
+        gatsbyRemarkPlugins: [
+          `gatsby-remark-prismjs`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1000,
+              linkImagesToOriginal: false,
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
-        printRejected: true, // Print removed selectors and processed file names
-        // develop: true, // Enable while using `gatsby develop`
-        // tailwind: true, // Enable tailwindcss support
-        // whitelist: ['whitelist'], // Don't remove this selector
-        // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
-        // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
+        printRejected: true,
       },
     },
-    // 'gatsby-remark-images',
-    // 'gatsby-remark-prismjs',
-    // 'gatsby-remark-autolink-headers',
+    'gatsby-remark-autolink-headers',
   ],
 };

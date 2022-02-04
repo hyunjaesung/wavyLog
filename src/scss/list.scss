@@ -41,6 +41,8 @@
 @media (max-width: 600px) {
   .list {
     grid-template-columns: 1fr;
+    padding: 0px;
+    margin: 20px;
     .category-list-wrapper {
       h3 {
         font-size: 1.3rem;

@@ -1,0 +1,209 @@
+---
+title: '네이밍 기본'
+date: '2022-07-25'
+category: 'DeepDive'
+---
+
+## 기본 구조
+
+prefix? + action (A) + high context (HC) + low context? (LC)
+
+### Prefix
+
+- 보통 변수 이름에만 쓰이는 변수의 의미 나타내는 용도
+- is
+  ```jsx
+  const color = 'blue';
+  const isBlue = color === 'blue'; // characteristic
+  const isPresent = true; // state
+  if (isBlue && isPresent) {
+    console.log('Blue is present!');
+  }
+  ```
+- has
+  ```jsx
+  /* Bad */
+  const isProductsExist = productsCount > 0;
+  const areProductsPresent = productsCount > 0;
+  /* Good */
+  const hasProducts = productsCount > 0;
+  ```
+- should
+  ```jsx
+  function shouldUpdateUrl(url, expectedUrl) {
+    return url !== expectedUrl;
+  }
+  ```
+- min / max
+  ```jsx
+  /**
+   * Renders a random amount of posts within
+   * the given min/max boundaries.
+   */
+  function renderPosts(posts, minPosts, maxPosts) {
+    return posts.slice(0, randomBetween(minPosts, maxPosts));
+  }
+  ```
+- prev / next
+
+  ```jsx
+  function fetchPosts() {
+    const prevPosts = this.state.posts;
+
+    const fetchedPosts = fetch('...');
+    const nextPosts = concat(prevPosts, fetchedPosts);
+
+    this.setState({posts: nextPosts});
+  }
+  ```
+
+### Actions
+
+- 보통 함수에만 쓰이는 함수의 동사 의미 / 함수가 뭐하는지 나타냄
+- get
+  ```jsx
+  function getFruitsCount() {
+    return this.fruits.length;
+  }
+  ```
+- set
+  ```jsx
+  const fruits = 0;
+  function setFruits(nextFruits) {
+    fruits = nextFruits;
+  }
+  setFruits(5);
+  console.log(fruits); // 5
+  ```
+- reset
+
+  ```jsx
+  const initialFruits = 5;
+  const fruits = initialFruits;
+  setFruits(10);
+  console.log(fruits); // 10
+
+  function resetFruits() {
+    fruits = initialFruits;
+  }
+  resetFruits();
+  console.log(fruits); // 5
+  ```
+
+- fetch
+  ```jsx
+  function fetchPosts(postCount) {
+  	return fetch('https://api.dev/posts', {...})
+  }
+  ```
+- remove
+  ```jsx
+  function removeFilter(filterName, filters) {
+    return filters.filter(name => name !== filterName);
+  }
+  const selectedFilters = ['price', 'availability', 'size'];
+  removeFilter('price', selectedFilters);
+  ```
+- delete
+  ```jsx
+  function deletePost(id) {
+    return database.find({id}).delete();
+  }
+  ```
+- compose
+  ```jsx
+  function composePageUrl(pageName, pageId) {
+    return `${pageName.toLowerCase()}-${pageId}`;
+  }
+  ```
+- handle
+  ```jsx
+  function handleLinkClick() {
+    console.log('Clicked a link!');
+  }
+  link.addEventListener('click', handleLinkClick);
+  ```
+
+### Context
+
+```jsx
+function filter(predicate, list) {
+  return list.filter(predicate);
+}
+/* Function operating exactly on posts */
+function getRecentPosts(posts) {
+  return filter(posts, post => post.date === Date.now());
+}
+```
+
+[요약](https://www.notion.so/95e7344fd54143dd82e8e52ffdfba0fa)
+
+## 적용 규칙
+
+1. 이름은 짧고 직관적이고 descriptive하게
+
+   ```jsx
+   /* Bad */
+   const a = 5; // "a" could mean anything
+   const isPaginatable = postsCount > 10; // "Paginatable" sounds extremely unnatural
+   const shouldPaginatize = postsCount > 10; // Made up verbs are so much fun!
+   ```
+
+   ```jsx
+   /* Good */
+   const postsCount = 5;
+   const hasPagination = postsCount > 10;
+   const shouldDisplayPagination = postsCount > 10; // alternatively
+   ```
+
+2. 줄여쓰기 금지
+
+   ```jsx
+   /* Bad */
+   const onItmClk = () => {};
+   /* Good */
+   const onItemClick = () => {};
+   ```
+
+3. 메서드 이름 Context 중복 금지
+
+   ```jsx
+   class MenuItem {
+   /* Bad */
+   /* Method name duplicates the context (which is "MenuItem") */
+   	handleMenuItemClick = (event) => { ... }
+
+   /* Good */
+   /* Reads nicely as `MenuItem.handleClick()` */
+   	handleClick = (event) => { ... }
+   }
+   ```
+
+4. 변수명은 기대 되는 결과를 나타내야 된다
+
+   ```jsx
+   /* Bad */
+   const isEnabled = itemsCount > 3;
+   return <Button disabled={!isEnabled} />;
+   /* Good */
+   const isDisabled = itemsCount <= 3;
+   return <Button disabled={isDisabled} />;
+   ```
+
+5. 단수 복수 구별하기
+
+   ```jsx
+   /* Bad */ const friends = 'Bob';
+   const friend = ['Bob', 'Tony', 'Tanya'];
+   /* Good */ const friend = 'Bob';
+   const friends = ['Bob', 'Tony', 'Tanya'];
+   ```
+
+6. 의미가 있고 읽을 수 있는 변수이름 쓰기
+
+   ```jsx
+   // simply awful
+   const yyyymmdstr = moment().format('YYYY/MM/DD');
+   // Instead
+   const currentDate = moment().format('YYYY/MM/DD');
+   ```
