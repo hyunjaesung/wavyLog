@@ -6,7 +6,7 @@ const BlogPage = () => {
   const data = useStaticQuery(
     graphql`
       query MyQuery {
-        allMdx {
+        allMdx(sort: {fields: frontmatter___date, order: DESC}) {
           nodes {
             body
             id

@@ -51,8 +51,8 @@ module.exports = {
         // purgeOnly : ['components/', '/main.css', 'bootstrap/'], // Purge only these files/folders
       },
     },
-    'gatsby-remark-images',
-    'gatsby-remark-prismjs',
-    'gatsby-remark-autolink-headers',
+    // 'gatsby-remark-images',
+    // 'gatsby-remark-prismjs',
+    // 'gatsby-remark-autolink-headers',
   ],
 };
