@@ -81,29 +81,6 @@ module.exports = {
         ],
       },
     },
-    // SEO
-    {
-      resolve: "gatsby-plugin-next-seo",
-      options: {
-        language: "ko",
-        openGraph: {
-          title: title,
-          description: description,
-          type: "website",
-          locale: "ko_KR",
-          url: siteUrl,
-          site_name: title,
-          images: [
-            {
-              url: thumbnail,
-              width: 800,
-              height: 400,
-              alt: "stevy's wavy log thumbnail",
-            },
-          ],
-        },
-      },
-    },
     "gatsby-remark-autolink-headers",
     {
       resolve: "gatsby-plugin-sitemap",
