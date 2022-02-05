@@ -15,16 +15,16 @@ const BlogPost = ({
   return (
     <Layout>
       <GatsbySeo
-        title={title}
+        title={`${title} | Stevy's wavyLog`}
         openGraph={{
           title
         }}
       />
-        <section className="post">
-          <h1 className="title">{title}</h1>
-          <p className="date">{date}</p>
-          <MDXRenderer>{body}</MDXRenderer>
-        </section>
+      <section className="post">
+        <h1 className="title">{title}</h1>
+        <p className="date">{date}</p>
+        <MDXRenderer>{body}</MDXRenderer>
+      </section>
     </Layout>
   );
 };

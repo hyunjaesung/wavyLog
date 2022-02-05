@@ -158,6 +158,7 @@ module.exports = {
         language: "ko",
         openGraph: {
           title: title,
+          titleTemplate: `%s | Stevy's wavyLog`,
           description: description,
           type: "website",
           locale: "ko_KR",
