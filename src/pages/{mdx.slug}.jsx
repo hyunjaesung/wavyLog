@@ -15,16 +15,20 @@ const BlogPost = ({
 }) => {
   return (
     <Layout>
-      <Link to="/">
-        <span style={{color: 'white'}}>
-          <FontAwesomeIcon icon={faChevronLeft} size="2x" />
-        </span>
-      </Link>
-      <section className="post">
-        <h1 className="title">{title}</h1>
-        <p className="date">{date}</p>
-        <MDXRenderer>{body}</MDXRenderer>
-      </section>
+      {body && (
+      <>
+        <Link to="/">
+          <span style={{color: 'white'}}>
+            <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+          </span>
+        </Link>
+        <section className="post">
+          <h1 className="title">{title}</h1>
+          <p className="date">{date}</p>
+          <MDXRenderer>{body}</MDXRenderer>
+        </section>
+      </>
+      )}
     </Layout>
   );
 };
