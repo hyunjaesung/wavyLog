@@ -13,6 +13,7 @@ module.exports = {
     image: thumbnail,
   },
   plugins: [
+    "gatsby-plugin-react-helmet",
     `gatsby-plugin-sass`,
     "gatsby-plugin-image",
     {
