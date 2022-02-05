@@ -15,18 +15,18 @@ module.exports = {
   plugins: [
     `gatsby-plugin-sass`,
     "gatsby-plugin-image",
-    // {
-    //   resolve: "gatsby-plugin-manifest", // PWA
-    //   options: {
-    //     name: `Stevy's wavyLog`,
-    //     short_name: "wavyLog",
-    //     start_url: "/",
-    //     background_color: `#2e3437`,
-    //     theme_color: `#2e3437`,
-    //     display: "standalone",
-    //     icon: "src/images/profile.jpeg",
-    //   },
-    // },
+    {
+      resolve: "gatsby-plugin-manifest", // PWA
+      options: {
+        name: `Stevy's wavyLog`,
+        short_name: "wavyLog",
+        start_url: "/",
+        background_color: `#2e3437`,
+        theme_color: `#2e3437`,
+        display: "standalone",
+        icon: "src/images/profile.jpeg",
+      },
+    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
