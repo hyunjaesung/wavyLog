@@ -162,6 +162,10 @@ module.exports = {
         serialize: ({ path, modifiedTime }) => {
           if (modifiedTime) {
             return {
+              url:
+                path[path.length - 1] === "/"
+                  ? path.slice(0, path.length - 1)
+                  : path,
               url: path,
               lastmod: modifiedTime,
               changefreq: `monthly`,
@@ -169,7 +173,10 @@ module.exports = {
             };
           }
           return {
-            url: path,
+            url:
+              path[path.length - 1] === "/"
+                ? path.slice(0, path.length - 1)
+                : path,
             lastmod: path === "/" ? new Date() : null,
             changefreq: path === "/" ? "weekly" : `monthly`,
             priority: path === "/" ? 0.9 : 0.7,
