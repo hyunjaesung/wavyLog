@@ -139,6 +139,7 @@ body {
   font-family: "Noto Sans KR";
   font-size: 1.4rem;
   font-weight: 300;
+  width: 100%;
 }
 
 footer {
@@ -149,10 +150,17 @@ footer {
   justify-content: center;
 }
 
+@media (max-width: 600px) {
+  footer {
+    font-size: 1rem;
+  }
+}
+
 .layout {
   width: 100vw;
   max-width: 1000px;
 }
+
 @import "./codeblock.scss";
 @import "./header.scss";
 @import "./list.scss";

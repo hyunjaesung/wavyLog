@@ -47,8 +47,14 @@
   .list {
     grid-template-columns: 1fr;
     padding: 0px;
-    margin: 20px;
+    width: 100vw;
     .category-list-wrapper {
+      .list_title {
+        span {
+          font-size: 1.6rem;
+          padding-left: 10px;
+        }
+      }
       h3 {
         width: 90%;
         font-size: 1.3rem;
@@ -60,6 +66,7 @@
           display: none;
         }
         .title {
+          margin-left: 10px;
           font-size: 1.2rem;
         }
       }
