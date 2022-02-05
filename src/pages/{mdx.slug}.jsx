@@ -6,7 +6,15 @@ import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
 const BlogPost = ({
   data: {
+    allSite:{
+      nodes:{
+        siteMetadata:{
+          siteUrl
+        }
+      }
+    },
     mdx: {
+      slug,
       body,
       frontmatter: {date, title},
     },
@@ -17,7 +25,8 @@ const BlogPost = ({
       <GatsbySeo
         title={`${title} | Stevy's wavyLog`}
         openGraph={{
-          title
+          title,
+          url:`${siteUrl}/${slug}`
         }}
       />
       <section className="post">
@@ -37,6 +46,14 @@ export const query = graphql`
         date
       }
       body
+      slug
+    }
+    allSite {
+      nodes {
+        siteMetadata {
+          siteUrl
+        }
+      }
     }
   }
 `;

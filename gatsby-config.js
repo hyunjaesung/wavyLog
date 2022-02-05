@@ -1,7 +1,7 @@
 const title = `Stevy's wavyLog`;
 const description = `Stevy의 개발 블로그 입니다.`;
 const thumbnail = "/thumbnail.png";
-const siteUrl = `https://www.stevy.dev`;
+const siteUrl = `https://lucid-franklin-1b6fbe.netlify.app`;
 
 module.exports = {
   siteMetadata: {
