@@ -7,11 +7,9 @@ import { GatsbySeo } from 'gatsby-plugin-next-seo';
 const BlogPost = ({
   data: {
     allSite:{
-      nodes:{
-        siteMetadata:{
-          siteUrl
-        }
-      }
+      nodes:[
+        meta
+      ]
     },
     mdx: {
       slug,
@@ -26,7 +24,7 @@ const BlogPost = ({
         title={`${title} | Stevy's wavyLog`}
         openGraph={{
           title,
-          url:`${siteUrl}/${slug}`
+          url:`${meta.siteMetadata.siteUrl}/${slug}`
         }}
       />
       <section className="post">
