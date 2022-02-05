@@ -13,15 +13,14 @@ const BlogPost = ({
     },
   },
 }) => {
-  console.log(title);
   return (
     <Layout>
+      <Link to="/">
+        <span style={{color: 'white'}}>
+          <FontAwesomeIcon icon={faChevronLeft} size="2x" />
+        </span>
+      </Link>
       <section className="post">
-        <Link to="/">
-          <span style={{color: 'white'}}>
-            <FontAwesomeIcon icon={faChevronLeft} size="2x" />
-          </span>
-        </Link>
         <h1 className="title">{title}</h1>
         <p className="date">{date}</p>
         <MDXRenderer>{body}</MDXRenderer>
