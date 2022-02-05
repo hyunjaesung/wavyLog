@@ -10,7 +10,7 @@ const BlogPost = ({
   data: {
     mdx: {
       body,
-      frontmatter: {date, title, description = 'Stevy의 개발 블로그입니다.'},
+      frontmatter: {date, title},
     },
   },
 }) => {
@@ -18,9 +18,9 @@ const BlogPost = ({
     <Layout>
       <Helmet>
         <title>{`${title} | Stevy's wavyLog 🌊`}</title>
-        <meta name="description" content={`${description}`}></meta>
+        {/* <meta name="description" content={`${description}`}></meta>
         <meta property="og:description" content={`${description}`}></meta>
-        <meta name="twitter:description" content={`${description}`}></meta>
+        <meta name="twitter:description" content={`${description}`}></meta> */}
       </Helmet>
       {body && (
       <>
@@ -46,7 +46,6 @@ export const query = graphql`
       frontmatter {
         title
         date
-        description
       }
       body
     }

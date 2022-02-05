@@ -60,7 +60,7 @@ const Main = () => {
   return (
     <Layout>
       <Helmet>
-        <title>${title}</title>
+        <title>Stevy's wavyLog 🌊</title>
       </Helmet>
       <section className="list">
         {Object.entries(categories).map(([key, value]) => (
