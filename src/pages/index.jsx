@@ -1,5 +1,6 @@
 import {graphql, Link, useStaticQuery} from 'gatsby';
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import Layout from '../components/Layout';
 
 const Title = ({title}) => (
