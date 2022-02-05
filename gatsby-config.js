@@ -13,7 +13,6 @@ module.exports = {
     image: thumbnail,
   },
   plugins: [
-    "gatsby-plugin-react-helmet",
     `gatsby-plugin-sass`,
     "gatsby-plugin-image",
     {
@@ -81,7 +80,6 @@ module.exports = {
         ],
       },
     },
-    "gatsby-remark-autolink-headers",
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
