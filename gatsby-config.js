@@ -51,12 +51,6 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-page-creator',
-      options: {
-        path: `${__dirname}/src/posts/`,
-      },
-    },
-    {
       resolve: `gatsby-plugin-mdx`,
       extensions: ['mdx', 'md'],
       options: {
@@ -145,20 +139,18 @@ module.exports = {
           allSitePage: { nodes: allPages },
           allMdx: { nodes: allBlogPostPages },
         }) => {
-          console.log(allPages, allBlogPostPages);
           const wpNodeMap = allBlogPostPages.reduce((acc, node) => {
             const {
               parent: { modifiedTime },
               slug,
             } = node;
-            const uri = `/${slug}/`;
+            const uri = `/${slug}`;
             acc[uri] = { modifiedTime };
 
             return acc;
           }, {});
 
           return allPages.map((page) => {
-            console.log(wpNodeMap[page.path]);
             return { ...page, ...wpNodeMap[page.path] };
           });
         },
