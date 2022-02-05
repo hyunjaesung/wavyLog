@@ -4,17 +4,24 @@ import {MDXRenderer} from 'gatsby-plugin-mdx';
 import Layout from '../components/Layout';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons';
+import { Helmet } from 'react-helmet';
 
 const BlogPost = ({
   data: {
     mdx: {
       body,
-      frontmatter: {date, title},
+      frontmatter: {date, title, description = 'Stevy의 개발 블로그입니다.'},
     },
   },
 }) => {
   return (
     <Layout>
+      <Helmet>
+        <title>{`${title} | Stevy's wavyLog 🌊`}</title>
+        <meta name="description" content={`${description}`}></meta>
+        <meta property="og:description" content={`${description}`}></meta>
+        <meta name="twitter:description" content={`${description}`}></meta>
+      </Helmet>
       {body && (
       <>
         <Link to="/">
@@ -39,6 +46,7 @@ export const query = graphql`
       frontmatter {
         title
         date
+        description
       }
       body
     }
