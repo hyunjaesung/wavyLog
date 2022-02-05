@@ -1,6 +1,6 @@
-const title = `Stevy's wavyLog`
-const description = `Stevy의 개발 블로그 입니다.`
-const thumbnail = "/thumbnail.png"
+const title = `Stevy's wavyLog`;
+const description = `Stevy의 개발 블로그 입니다.`;
+const thumbnail = "/thumbnail.png";
 const siteUrl = `https://www.stevy.dev`;
 
 module.exports = {
@@ -10,37 +10,37 @@ module.exports = {
     siteUrl: siteUrl,
     description: description,
     author: "hyunjaesung",
-    image: thumbnail
+    image: thumbnail,
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
+    "gatsby-plugin-react-helmet",
     `gatsby-plugin-sass`,
-    'gatsby-plugin-image',
+    "gatsby-plugin-image",
     {
-      resolve: 'gatsby-plugin-manifest', // PWA
+      resolve: "gatsby-plugin-manifest", // PWA
       options: {
         name: `Stevy's wavyLog`,
-        short_name: 'wavyLog',
-        start_url: '/',
+        short_name: "wavyLog",
+        start_url: "/",
         background_color: `#2e3437`,
         theme_color: `#2e3437`,
-        display: 'standalone',
-        icon: 'src/images/profile.jpeg',
+        display: "standalone",
+        icon: "src/images/profile.jpeg",
       },
     },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'images',
+        name: "images",
         path: `${__dirname}/src/images/`,
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'pages',
+        name: "pages",
         path: `${__dirname}/src/pages/`,
       },
     },
@@ -53,7 +53,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-mdx`,
-      extensions: ['mdx', 'md'],
+      extensions: ["mdx", "md"],
       options: {
         gatsbyRemarkPlugins: [
           {
@@ -110,7 +110,7 @@ module.exports = {
         printRejected: true,
       },
     },
-    'gatsby-remark-autolink-headers',
+    "gatsby-remark-autolink-headers",
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
@@ -152,7 +152,10 @@ module.exports = {
           }, {});
 
           return allPages.map((page) => {
-            return { ...page, ...wpNodeMap[page.path] };
+            return {
+              path: page.path.slice(0, page.path.length - 1),
+              ...wpNodeMap[page.path],
+            };
           });
         },
 
