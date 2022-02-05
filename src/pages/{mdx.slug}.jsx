@@ -16,9 +16,9 @@ const BlogPost = ({
     <Layout>
       <GatsbySeo
         title={`${title} | Stevy's wavyLog`}
-        // openGraph={{
-        //   title
-        // }}
+        openGraph={{
+          title
+        }}
       />
       <section className="post">
         <h1 className="title">{title}</h1>
