@@ -14,7 +14,7 @@ const BlogPost = ({
     mdx: {
       slug,
       body,
-      frontmatter: {date, title},
+      frontmatter: {date, title, icon},
     },
   },
 }) => {
@@ -40,8 +40,9 @@ export const query = graphql`
   query ($id: String) {
     mdx(id: {eq: $id}) {
       frontmatter {
+        icon
         title
-        date
+        date(formatString: "MMMM YYYY")
       }
       body
       slug

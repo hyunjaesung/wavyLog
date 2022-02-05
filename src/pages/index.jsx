@@ -3,18 +3,18 @@ import React from 'react';
 import Layout from '../components/Layout';
 
 const Title = ({title}) => (
-  <h3>
+  <div className="list_title">
     <span>{title}</span>
-  </h3>
+  </div>
 );
 
 const ListWrapper = ({children}) => <div className="category-list-wrapper">{children}</div>;
 
-const Item = ({date, title, slug}) => (
+const Item = ({date, title, slug, icon}) => (
   <Link to={`/${slug}`}>
     <div className="post-item">
       <span className="date">{date}</span>
-      <span className="title">{title}</span>
+      <span className="title">{`${icon} ${title}`}</span>
     </div>
   </Link>
 );
@@ -29,9 +29,10 @@ const Main = () => {
           nodes {
             id
             frontmatter {
-              date
+              date(formatString: "MMMM YYYY")
               category
               title
+              icon
             }
             slug
           }
@@ -46,14 +47,17 @@ const Main = () => {
     Book: [],
   };
 
-  nodes.forEach(({frontmatter: {category, date, title} = {}, id, slug}) => {
-    categories[category].push({
-      date,
-      category,
-      title,
-      id,
-      slug,
-    });
+  nodes.forEach(({frontmatter: {category, date, title, icon} = {}, id, slug}) => {
+    if(categories[category] !== undefined){
+      categories[category].push({
+        date,
+        category,
+        title,
+        id,
+        slug,
+        icon
+      });
+    }
   });
 
   return (

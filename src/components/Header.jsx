@@ -1,5 +1,6 @@
 import {Link} from 'gatsby';
 import React from 'react';
+import profile from "../../src/images/profile.jpeg"
 
 const Header = () => {
   return (
@@ -10,8 +11,15 @@ const Header = () => {
         </h1>
       </Link>
       <nav>
-        <Link to="/">Archive</Link>
-        <Link to="/aboutMe">About Me</Link>
+        <Link to="/aboutMe">
+          <div class="me-wrapper">
+            <img src={profile} alt="profile" width="50" height="50" />
+            <div class="info-wrapper">
+              <span class="name">Stevy</span>
+              <span class="job">Web Developer</span>
+            </div>
+          </div>
+        </Link>
       </nav>
     </section>
   );

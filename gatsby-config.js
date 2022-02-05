@@ -13,8 +13,6 @@ module.exports = {
     image: thumbnail,
   },
   plugins: [
-    `gatsby-plugin-sass`,
-    "gatsby-plugin-image",
     {
       resolve: "gatsby-plugin-manifest", // PWA
       options: {
@@ -27,8 +25,6 @@ module.exports = {
         icon: "src/images/profile.jpeg",
       },
     },
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -73,7 +69,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 1000,
+              maxWidth: 700,
               linkImagesToOriginal: false,
             },
           },
@@ -175,5 +171,9 @@ module.exports = {
         },
       },
     },
+    `gatsby-plugin-sass`,
+    "gatsby-plugin-image",
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
   ],
 };

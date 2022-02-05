@@ -8,19 +8,24 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  padding: 30px;
   align-items: start;
   .category-list-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    h3 {
-      font-size: 1.8rem;
+    .list_title {
+      display: flex;
+      align-items: center;
+      span {
+        font-size: 1.8rem;
+        font-weight: 800;
+        padding-bottom: 4px;
+        padding-left: 10px;
+      }
       margin-bottom: 1.5rem;
-      font-weight: 800;
-
-      padding-bottom: 20px;
-      border-bottom: 1px solid #b5b7b860;
+      background-color: #273c7594;
+      border-left: 3px solid white;
+      border-radius: 2px;
     }
     .post-item {
       display: flex;
