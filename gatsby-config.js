@@ -104,12 +104,6 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-plugin-purgecss`,
-      options: {
-        printRejected: true,
-      },
-    },
     "gatsby-remark-autolink-headers",
     {
       resolve: "gatsby-plugin-sitemap",
@@ -153,7 +147,7 @@ module.exports = {
 
           return allPages.map((page) => {
             return {
-              path: page.path.slice(0, page.path.length - 1),
+              ...page,
               ...wpNodeMap[page.path],
             };
           });
