@@ -45,10 +45,12 @@
     margin: 20px;
     .category-list-wrapper {
       h3 {
+        width: 90%;
         font-size: 1.3rem;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #b5b7b860;
       }
       .post-item {
-        margin-bottom: 1.4rem;
         .date {
           display: none;
         }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {graphql} from 'gatsby';
 import {MDXRenderer} from 'gatsby-plugin-mdx';
 import Layout from '../components/Layout';
-import SEO from '../components/SEO';
+import { GatsbySeo } from 'gatsby-plugin-next-seo';
 
 const BlogPost = ({
   data: {
@@ -14,16 +14,17 @@ const BlogPost = ({
 }) => {
   return (
     <Layout>
-      <SEO title={`${title}`}/>
-      {body && (
-      <>
+      <GatsbySeo
+        title={title}
+        openGraph={{
+          title
+        }}
+      />
         <section className="post">
           <h1 className="title">{title}</h1>
           <p className="date">{date}</p>
           <MDXRenderer>{body}</MDXRenderer>
         </section>
-      </>
-      )}
     </Layout>
   );
 };

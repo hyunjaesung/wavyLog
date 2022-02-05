@@ -1,8 +1,6 @@
 import {graphql, Link, useStaticQuery} from 'gatsby';
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import Layout from '../components/Layout';
-import SEO from '../components/SEO';
 
 const Title = ({title}) => (
   <h3>
@@ -60,7 +58,6 @@ const Main = () => {
 
   return (
     <Layout>
-      <SEO/>
       <section className="list">
         {Object.entries(categories).map(([key, value]) => (
           <ListWrapper key={key}>
