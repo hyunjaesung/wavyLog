@@ -19,7 +19,6 @@ const BlogPost = ({
     },
   },
 }) => {
-  console.log(category);
   return (
     <Layout>
       <GatsbySeo
