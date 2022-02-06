@@ -20,6 +20,23 @@
   img {
     border-radius: 10px;
   }
+
+  $color-code-background: #2c3e50;
+  $color-code-color: #d35400;
+
+  code {
+    background-color: $color-code-background;
+    color: $color-code-color;
+    border-radius: 0.3em;
+    padding: 2px 5px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  pre code {
+    background-color: transparent;
+    color: white;
+    white-space: pre;
+  }
 }
 
 @media (max-width: 600px) {
