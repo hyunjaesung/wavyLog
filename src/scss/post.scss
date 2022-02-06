@@ -21,6 +21,16 @@
     border-radius: 10px;
   }
 
+  .img-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100%;
+    }
+  }
+
   $color-code-background: #2c3e50;
   $color-code-color: #d35400;
 
