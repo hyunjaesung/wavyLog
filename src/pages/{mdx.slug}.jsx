@@ -3,6 +3,7 @@ import {graphql} from 'gatsby';
 import {MDXRenderer} from 'gatsby-plugin-mdx';
 import Layout from '../components/Layout';
 import { GatsbySeo } from 'gatsby-plugin-next-seo';
+import AboutMe from '../components/aboutMe';
 
 const BlogPost = ({
   data: {
