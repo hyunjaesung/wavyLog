@@ -11,12 +11,12 @@ const Header = () => {
         </h1>
       </Link>
       <nav>
-        <Link to="/aboutMe">
-          <div class="me-wrapper">
+        <Link to="/about-me">
+          <div className="me-wrapper">
             <img src={profile} alt="profile" width="50" height="50" />
-            <div class="info-wrapper">
-              <span class="name">Stevy</span>
-              <span class="job">Web Developer</span>
+            <div className="info-wrapper">
+              <span className="name">Stevy</span>
+              <span className="job">Web Developer / kakao</span>
             </div>
           </div>
         </Link>
