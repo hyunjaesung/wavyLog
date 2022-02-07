@@ -1,0 +1,73 @@
+---
+icon: '📺'
+title: '리액트 컴포넌트 내부 함수 선언과 재생성에 관하여'
+date: '2022-02-07'
+category: 'BriefDive'
+---
+
+### 컴포넌트 내부에 함수선언은 왜 하는가
+
+- 함수가 useState같은 외부 state 값을 의존적으로 가져다 사용해야되거나 외부 state 값을 변화시키는 때 내부 선언이 필요하다. (대부분의 컴포넌트 내부의 state를 이용하는 이벤트 핸들링 함수)
+  → 컴포넌트 내부에 함수를 선언하고 이용해야 한다.
+- 이때 컴포넌트 리렌더를 할 경우 매번 새로 함수를 생성되게 되는데 이를 방지하고자 메모이제이션 하기위해 `useCallback`을 쓴다
+  → 함수를 외부에 두고 import 해도 하나의 스태틱 생성만 하게 되므로 컴포넌트 리렌더의 경우에도 재생성을 하지는 않는다.
+  반면, _외부 상태 값에 따라 함수가 재생성 되야된다_ 거나 _함수가 외부 상태 값을 변조시킨다_ 등의 경우 처럼 컴포넌트에 대한 의존성을 가지기는 어렵다.
+  또, 특히 파라미터를 전달해서 jsx내부의 이벤트 핸들링 함수로 이용하려 한다면 결국 jsx 안에서 콜백함수로 재선언을 해줘야한다.
+
+### 컴포넌트에서 이용되는 함수의 재생성을 막고 싶다
+
+```jsx
+import React, {useState, useMemo, useCallback} from 'react';
+
+const getAverage = numbers => {
+  console.log('평균값 계산중..');
+  if (numbers.length === 0) return 0;
+  const sum = numbers.reduce((a, b) => a + b);
+  return sum / numbers.length;
+};
+
+const Average = () => {
+  const [list, setList] = useState([]);
+  const [number, setNumber] = useState('');
+
+  // 이벤트 핸들링 함수인 onChange와 onInsert 모두 컴포넌트 안의 state에 의존적이다
+
+  const onChange = useCallback(e => {
+    setNumber(e.target.value);
+  }, []); // 컴포넌트가 처음 렌더링 될 때만 함수 생성
+
+  const onInsert = useCallback(
+    e => {
+      const nextList = list.concat(parseInt(number));
+      setList(nextList);
+      setNumber('');
+    },
+    [number, list]
+  ); // number 혹은 list 가 바뀌었을 때만 함수 생성
+
+  const avg = useMemo(() => getAverage(list), [list]);
+
+  // 재생성을 막고싶어서 외부함수로 호출해서 계산에 필요한 값을 파라미터로 전달한다 하더라도
+  // 컴포넌트 내부에서 콜백 생성을 새로 하는 경우가 많기에
+  // 결국 다시 함수 선언을 하게되어서 재생성을 방지하기 위해 외부에서 함수를 불러오는 의미가 없을 수 있다
+
+  // 결국 콜백을 이용하고 리렌더시 재생성을 피하고 싶다면 메모이제이션 함수를 써야 한다
+
+  return (
+    <div>
+      <input value={number} onChange={onChange} />
+      <button onClick={onInsert}>등록</button>
+      <ul>
+        {list.map((value, index) => (
+          <li key={index}>{value}</li>
+        ))}
+      </ul>
+      <div>
+        <b>평균값:</b> {avg}
+      </div>
+    </div>
+  );
+};
+
+export default Average;
+```

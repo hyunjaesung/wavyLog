@@ -42,20 +42,21 @@ const Main = () => {
   );
 
   const categories = {
-    Essay: [],
     DeepDive: [],
+    Essay: [],
     Book: [],
+    BriefDive: [],
   };
 
   nodes.forEach(({frontmatter: {category, date, title, icon} = {}, id, slug}) => {
-    if(categories[category] !== undefined){
+    if (categories[category] !== undefined) {
       categories[category].push({
         date,
         category,
         title,
         id,
         slug,
-        icon
+        icon,
       });
     }
   });
