@@ -1,8 +1,8 @@
 ---
-icon: "🐫"
-title: "프론트앤드 웹 성능 최적화 가이드 - 렌더 및 실행 최적화"
-date: "2021-05-09"
-category: "DeepDive"
+icon: '🐫'
+title: '프론트앤드 웹 성능 최적화 가이드 - 렌더 및 실행 최적화'
+date: '2021-05-09'
+category: 'Deep Dive'
 ---
 
 [프론트앤드 웹 성능 가이드 - 성능 지표, 데이터 로드 최적화](/frontend-web-performance-guide-1) 에 이은 글입니다
@@ -55,12 +55,12 @@ category: "DeepDive"
 &nbsp; `offsetHeight`, `offsetTop`과 같은 계산된 값을 속성으로 읽을 때 브라우저는 강제로 동기 레이아웃을 수행한다 (참고 : [What forces layout / reflow](https://gist.github.com/paulirish/5d52fb081b3570c81e3a))
 
 ```jsx
-const tabBtn = document.getElementById("tab_btn");
+const tabBtn = document.getElementById('tab_btn');
 
-tabBtn.style.fontSize = "24px";
+tabBtn.style.fontSize = '24px';
 console.log(testBlock.offsetTop);
 // offsetTop 호출 직전 브라우저 내부에서는 동기 레이아웃이 발생한다.
-tabBtn.style.margin = "10px";
+tabBtn.style.margin = '10px';
 // 레이아웃
 ```
 
@@ -69,23 +69,23 @@ tabBtn.style.margin = "10px";
 ```jsx
 // Bad
 function resizeAllParagraphs() {
-  const box = document.getElementById("box");
-  const paragraphs = document.querySelectorAll(".paragraph");
+  const box = document.getElementById('box');
+  const paragraphs = document.querySelectorAll('.paragraph');
 
   for (let i = 0; i < paragraphs.length; i += 1) {
-    paragraphs[i].style.width = box.offsetWidth + "px";
+    paragraphs[i].style.width = box.offsetWidth + 'px';
     // for문 돌면서 강제 동기 레이아웃 계속 진행
   }
 }
 
 // Good - 레이아웃 스래싱을 개선한 코드
 function resizeAllParagraphs() {
-  const box = document.getElementById("box");
-  const paragraphs = document.querySelectorAll(".paragraph");
+  const box = document.getElementById('box');
+  const paragraphs = document.querySelectorAll('.paragraph');
   const width = box.offsetWidth; // 강제 동기 레이아웃 한번만 진행
 
   for (let i = 0; i < paragraphs.length; i += 1) {
-    paragraphs[i].style.width = width + "px";
+    paragraphs[i].style.width = width + 'px';
   }
 }
 ```
@@ -108,20 +108,20 @@ function resizeAllParagraphs() {
 
   ```jsx
   // Bad
-  const app = document.getElementById("app");
+  const app = document.getElementById('app');
 
   for (let i = 0; i < 1000; i++) {
-    const el = document.createElement("div");
+    const el = document.createElement('div');
     el.innerText = `${i}`;
     app.appendChild(el);
   }
 
   // Good
-  const app = document.getElementById("app");
+  const app = document.getElementById('app');
   const frag = document.createDocumentFragment();
 
   for (let i = 0; i < 1000; i++) {
-    const el = document.createElement("div");
+    const el = document.createElement('div');
     el.innerText = `${i}`;
     frag.appendChild(el);
   }

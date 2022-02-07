@@ -42,10 +42,10 @@ const Main = () => {
   );
 
   const categories = {
-    DeepDive: [],
     Essay: [],
+    [`Deep Dive`]: [],
     Book: [],
-    BriefDive: [],
+    [`Brief Dive`]: [],
   };
 
   nodes.forEach(({frontmatter: {category, date, title, icon} = {}, id, slug}) => {

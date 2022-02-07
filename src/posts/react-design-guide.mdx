@@ -1,8 +1,8 @@
 ---
-icon: "🏗"
-title: "리액트 설계 가이드"
-date: "2021-05-30"
-category: "DeepDive"
+icon: '🏗'
+title: '리액트 설계 가이드'
+date: '2021-05-30'
+category: 'Deep Dive'
 ---
 
 ![건설](./images/construct.png)
@@ -117,11 +117,8 @@ components /
 
 ### 아토믹 디자인
 
-<div class='img-wrap'>
-  <img
-    src='http://bradfrost.com/wp-content/uploads/2015/12/atomic-gif-3.gif'
-    alt='atomicGif'
-  />
+<div class="img-wrap">
+  <img src="http://bradfrost.com/wp-content/uploads/2015/12/atomic-gif-3.gif" alt="atomicGif" />
 </div>
 
 - 페이지를 나눌 수 없을때 까지 쪼개서 재사용성을 극대화 한다
@@ -213,10 +210,10 @@ components /
     ```jsx
     // ./components/Label
 
-    import React from "react";
-    import styled from "styled-components";
+    import React from 'react';
+    import styled from 'styled-components';
 
-    function Label({ children }) {
+    function Label({children}) {
       return <StyledLabel>{children}</StyledLabel>;
     }
 
@@ -226,18 +223,18 @@ components /
       padding: 5px 7px;
     `;
 
-    export { Label };
+    export {Label};
     ```
 
   - 대장 컴포넌트
 
     ```jsx
-    import React, { useEffect, useRef, useState } from "react";
-    import styled from "styled-components";
-    import { CounterProvider } from "./useCounterContext";
-    import { Count, Label, Decrement, Increment } from "./components";
+    import React, {useEffect, useRef, useState} from 'react';
+    import styled from 'styled-components';
+    import {CounterProvider} from './useCounterContext';
+    import {Count, Label, Decrement, Increment} from './components';
 
-    function Counter({ children, onChange, initialValue = 0 }) {
+    function Counter({children, onChange, initialValue = 0}) {
       const [count, setCount] = useState(initialValue);
 
       const firstMounded = useRef(true);
@@ -257,7 +254,7 @@ components /
       };
 
       return (
-        <CounterProvider value={{ count, handleIncrement, handleDecrement }}>
+        <CounterProvider value={{count, handleIncrement, handleDecrement}}>
           <StyledCounter>{children}</StyledCounter>
         </CounterProvider>
       );
@@ -276,31 +273,31 @@ components /
     Counter.Increment = Increment;
     Counter.Decrement = Decrement;
 
-    export { Counter };
+    export {Counter};
     ```
 
   - 사용 컴포넌트
 
     ```jsx
-    import React from "react";
-    import { Counter } from "./Counter";
+    import React from 'react';
+    import {Counter} from './Counter';
 
     function Usage() {
-      const handleChangeCounter = (count) => {
-        console.log("count", count);
+      const handleChangeCounter = count => {
+        console.log('count', count);
       };
 
       return (
         <Counter onChange={handleChangeCounter}>
-          <Counter.Decrement icon='minus' />
+          <Counter.Decrement icon="minus" />
           <Counter.Label>Counter</Counter.Label>
           <Counter.Count max={10} />
-          <Counter.Increment icon='plus' />
+          <Counter.Increment icon="plus" />
         </Counter>
       );
     }
 
-    export { Usage };
+    export {Usage};
     ```
 
     [alex83130/advanced-react-patterns](https://github.com/alex83130/advanced-react-patterns/tree/main/src/patterns/compound-component)
@@ -339,26 +336,26 @@ components /
 - 코드
 
   ```jsx
-  import React, { useState } from "react";
-  import { Counter } from "./Counter";
+  import React, {useState} from 'react';
+  import {Counter} from './Counter';
 
   function Usage() {
     const [count, setCount] = useState(0);
 
-    const handleChangeCounter = (newCount) => {
+    const handleChangeCounter = newCount => {
       setCount(newCount);
     };
     return (
       <Counter value={count} onChange={handleChangeCounter}>
-        <Counter.Decrement icon={"minus"} />
+        <Counter.Decrement icon={'minus'} />
         <Counter.Label>Counter</Counter.Label>
         <Counter.Count max={10} />
-        <Counter.Increment icon={"plus"} />
+        <Counter.Increment icon={'plus'} />
       </Counter>
     );
   }
 
-  export { Usage };
+  export {Usage};
   ```
 
   [alex83130/advanced-react-patterns](https://github.com/alex83130/advanced-react-patterns/tree/main/src/patterns/control-props)
@@ -386,12 +383,12 @@ components /
 - 코드
 
   ```jsx
-  import React from "react";
-  import { Counter } from "./Counter";
-  import { useCounter } from "./useCounter";
+  import React from 'react';
+  import {Counter} from './Counter';
+  import {useCounter} from './useCounter';
 
   function Usage() {
-    const { count, handleIncrement, handleDecrement } = useCounter(0);
+    const {count, handleIncrement, handleDecrement} = useCounter(0);
     const MAX_COUNT = 10;
 
     const handleClickIncrement = () => {
@@ -404,18 +401,10 @@ components /
     return (
       <>
         <Counter value={count}>
-          <Counter.Decrement
-            icon={"minus"}
-            onClick={handleDecrement}
-            disabled={count === 0}
-          />
+          <Counter.Decrement icon={'minus'} onClick={handleDecrement} disabled={count === 0} />
           <Counter.Label>Counter</Counter.Label>
           <Counter.Count />
-          <Counter.Increment
-            icon={"plus"}
-            onClick={handleClickIncrement}
-            disabled={count === MAX_COUNT}
-          />
+          <Counter.Increment icon={'plus'} onClick={handleClickIncrement} disabled={count === MAX_COUNT} />
         </Counter>
         <button onClick={handleClickIncrement} disabled={count === MAX_COUNT}>
           Custom increment btn 1
@@ -424,7 +413,7 @@ components /
     );
   }
 
-  export { Usage };
+  export {Usage};
   ```
 
   [https://github.com/alex83130/advanced-react-patterns/tree/main/src/patterns/custom-hooks](https://github.com/alex83130/advanced-react-patterns/tree/main/src/patterns/custom-hooks)
@@ -452,41 +441,43 @@ components /
 - 코드
 
   ```jsx
-  import { useState } from "react";
+  import {useState} from 'react';
 
   //Function which concat all functions together
-  const callFnsInSequence = (...fns) => (...args) =>
-    fns.forEach((fn) => fn && fn(...args));
+  const callFnsInSequence =
+    (...fns) =>
+    (...args) =>
+      fns.forEach(fn => fn && fn(...args));
 
-  function useCounter({ initial, max }) {
+  function useCounter({initial, max}) {
     const [count, setCount] = useState(initial);
 
     const handleIncrement = () => {
-      setCount((prevCount) => Math.min(prevCount + 1, max));
+      setCount(prevCount => Math.min(prevCount + 1, max));
     };
 
     const handleDecrement = () => {
-      setCount((prevCount) => Math.max(0, prevCount - 1));
+      setCount(prevCount => Math.max(0, prevCount - 1));
     };
 
     //props getter for 'Counter'
-    const getCounterProps = ({ ...otherProps } = {}) => ({
+    const getCounterProps = ({...otherProps} = {}) => ({
       value: count,
-      "aria-valuemax": max,
-      "aria-valuemin": 0,
-      "aria-valuenow": count,
+      'aria-valuemax': max,
+      'aria-valuemin': 0,
+      'aria-valuenow': count,
       ...otherProps,
     });
 
     //props getter for 'Decrement'
-    const getDecrementProps = ({ onClick, ...otherProps } = {}) => ({
+    const getDecrementProps = ({onClick, ...otherProps} = {}) => ({
       onClick: callFnsInSequence(handleDecrement, onClick),
       disabled: count === 0,
       ...otherProps,
     });
 
     //props getter for 'Increment'
-    const getIncrementProps = ({ onClick, ...otherProps } = {}) => ({
+    const getIncrementProps = ({onClick, ...otherProps} = {}) => ({
       onClick: callFnsInSequence(handleIncrement, onClick),
       disabled: count === max,
       ...otherProps,
@@ -502,50 +493,41 @@ components /
     };
   }
 
-  export { useCounter };
+  export {useCounter};
   ```
 
   ```jsx
-  import React from "react";
-  import { Counter } from "./Counter";
-  import { useCounter } from "./useCounter";
+  import React from 'react';
+  import {Counter} from './Counter';
+  import {useCounter} from './useCounter';
 
   const MAX_COUNT = 10;
 
   function Usage() {
-    const {
-      count,
-      getCounterProps,
-      getIncrementProps,
-      getDecrementProps,
-    } = useCounter({
+    const {count, getCounterProps, getIncrementProps, getDecrementProps} = useCounter({
       initial: 0,
       max: MAX_COUNT,
     });
 
     const handleBtn1Clicked = () => {
-      console.log("btn 1 clicked");
+      console.log('btn 1 clicked');
     };
 
     return (
       <>
         <Counter {...getCounterProps()}>
-          <Counter.Decrement icon={"minus"} {...getDecrementProps()} />
+          <Counter.Decrement icon={'minus'} {...getDecrementProps()} />
           <Counter.Label>Counter</Counter.Label>
           <Counter.Count />
-          <Counter.Increment icon={"plus"} {...getIncrementProps()} />
+          <Counter.Increment icon={'plus'} {...getIncrementProps()} />
         </Counter>
-        <button {...getIncrementProps({ onClick: handleBtn1Clicked })}>
-          Custom increment btn 1
-        </button>
-        <button {...getIncrementProps({ disabled: count > MAX_COUNT - 2 })}>
-          Custom increment btn 2
-        </button>
+        <button {...getIncrementProps({onClick: handleBtn1Clicked})}>Custom increment btn 1</button>
+        <button {...getIncrementProps({disabled: count > MAX_COUNT - 2})}>Custom increment btn 2</button>
       </>
     );
   }
 
-  export { Usage };
+  export {Usage};
   ```
 
   - getProps 함수로 이용가능한 Props제한하고 onClick disabled는 외부에 위임해서 오버로딩으로 덮어쓰기도 가능하다
@@ -578,15 +560,15 @@ components /
 - 코드
 
   ```jsx
-  import { useReducer } from "react";
+  import {useReducer} from 'react';
 
-  const internalReducer = ({ count }, { type, payload }) => {
+  const internalReducer = ({count}, {type, payload}) => {
     switch (type) {
-      case "increment":
+      case 'increment':
         return {
           count: Math.min(count + 1, payload.max),
         };
-      case "decrement":
+      case 'decrement':
         return {
           count: Math.max(0, count - 1),
         };
@@ -595,15 +577,15 @@ components /
     }
   };
 
-  function useCounter({ initial, max }, reducer = internalReducer) {
-    const [{ count }, dispatch] = useReducer(reducer, { count: initial });
+  function useCounter({initial, max}, reducer = internalReducer) {
+    const [{count}, dispatch] = useReducer(reducer, {count: initial});
 
     const handleIncrement = () => {
-      dispatch({ type: "increment", payload: { max } });
+      dispatch({type: 'increment', payload: {max}});
     };
 
     const handleDecrement = () => {
-      dispatch({ type: "decrement" });
+      dispatch({type: 'decrement'});
     };
 
     return {
@@ -615,23 +597,23 @@ components /
 
   useCounter.reducer = internalReducer;
   useCounter.types = {
-    increment: "increment",
-    decrement: "decrement",
+    increment: 'increment',
+    decrement: 'decrement',
   };
 
-  export { useCounter };
+  export {useCounter};
   ```
 
   ```jsx
-  import React from "react";
-  import { Counter } from "./Counter";
-  import { useCounter } from "./useCounter";
+  import React from 'react';
+  import {Counter} from './Counter';
+  import {useCounter} from './useCounter';
 
   const MAX_COUNT = 10;
   function Usage() {
     const reducer = (state, action) => {
       switch (action.type) {
-        case "decrement":
+        case 'decrement':
           return {
             count: Math.max(0, state.count - 2), //The decrement delta was changed for 2 (Default is 1)
           };
@@ -640,18 +622,15 @@ components /
       }
     };
 
-    const { count, handleDecrement, handleIncrement } = useCounter(
-      { initial: 0, max: 10 },
-      reducer
-    );
+    const {count, handleDecrement, handleIncrement} = useCounter({initial: 0, max: 10}, reducer);
 
     return (
       <>
         <Counter value={count}>
-          <Counter.Decrement icon={"minus"} onClick={handleDecrement} />
+          <Counter.Decrement icon={'minus'} onClick={handleDecrement} />
           <Counter.Label>Counter</Counter.Label>
           <Counter.Count />
-          <Counter.Increment icon={"plus"} onClick={handleIncrement} />
+          <Counter.Increment icon={'plus'} onClick={handleIncrement} />
         </Counter>
         <button onClick={handleIncrement} disabled={count === MAX_COUNT}>
           Custom increment btn 1
@@ -660,7 +639,7 @@ components /
     );
   }
 
-  export { Usage };
+  export {Usage};
   ```
 
   [alex83130/advanced-react-patterns](https://github.com/alex83130/advanced-react-patterns/tree/main/src/patterns/state-reducer)

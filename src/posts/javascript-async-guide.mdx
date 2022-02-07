@@ -1,8 +1,8 @@
 ---
-icon: "🌧"
-title: "자바스크립트 비동기 처리 가이드"
-date: "2021-04-25"
-category: "DeepDive"
+icon: '🌧'
+title: '자바스크립트 비동기 처리 가이드'
+date: '2021-04-25'
+category: 'Deep Dive'
 ---
 
 ### 내가 처음 겪은 비동기에 대한 경험
@@ -109,7 +109,7 @@ category: "DeepDive"
 
 const MAX_LOOP = 1000;
 
-const addAll = (max) => {
+const addAll = max => {
   const add = (i, result) => {
     let newResult = result;
     let finish = max - i > MAX_LOOP ? MAX_LOOP + i : max;
@@ -123,7 +123,7 @@ const addAll = (max) => {
       });
     } else {
       // 렌더 로직 실행
-      console.log("newResult", newResult);
+      console.log('newResult', newResult);
     }
   };
   requestAnimationFrame(() => add(0, 0));
