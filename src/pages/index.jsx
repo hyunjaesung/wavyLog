@@ -1,4 +1,5 @@
 import {graphql, Link, useStaticQuery} from 'gatsby';
+import {GatsbySeo} from 'gatsby-plugin-next-seo';
 import React from 'react';
 import Layout from '../components/Layout';
 
@@ -63,6 +64,7 @@ const Main = () => {
 
   return (
     <Layout>
+      <GatsbySeo title={`Stevy's wavyLog`} />
       <section className="list">
         {Object.entries(categories).map(([key, value]) => (
           <ListWrapper key={key}>
