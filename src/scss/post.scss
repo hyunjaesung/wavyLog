@@ -17,6 +17,15 @@
     color: #54a0ff;
   }
 
+  li {
+    margin-top: 3px;
+    span,
+    ul,
+    p {
+      margin: 5px;
+    }
+  }
+
   img {
     border-radius: 10px;
   }
