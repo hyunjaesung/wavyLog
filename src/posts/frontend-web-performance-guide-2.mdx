@@ -2,7 +2,7 @@
 icon: '🐫'
 title: '프론트앤드 웹 성능 최적화 가이드 - 렌더 및 실행 최적화'
 date: '2021-05-09'
-category: 'Deep Dive'
+category: 'Deep-Dive'
 ---
 
 [프론트앤드 웹 성능 가이드 - 성능 지표, 데이터 로드 최적화](/frontend-web-performance-guide-1) 에 이은 글입니다
@@ -36,8 +36,7 @@ category: 'Deep Dive'
   ![sceleton](./images/sceleton.png)
 - `Progressive Hydration`
   보통 프론트앤드 성능 개선 목표 달성을 위해 CSR 과 SSR 일방적으로 하나만 쓰기보다는 둘 모두의 장점을 이용하기 위해 둘 다 쓰게 된다. (참고 : [Web Rendering](https://www.notion.so/Web-Rendering-3246a7055d124a088fd86e7399ac36e4))
-
-       React에서는 첫 `FCP` 를 빠르게 하기위해서 Next.js 처럼 서버가 첫 렌더를 먼저 그려주고 `hydration`으로 이벤트를 입히는 방법을 흔히 쓰게 된다. 하지만 렌더가 되서 보이긴 하더라도 `hydration` 작업 중에 `TTI`가 늦어져서 사용자는 정작 동작을 못하는 문제가 생길 수 있는데 `Progressive Hydration` 을 이용하면 된다. `Progressive Hydration`은 `InteractionObserver`를 이용해서 보이는 컴포넌트 부터 `Hydration`을 진행하는 방법을 말한다.
+  React에서는 첫 `FCP` 를 빠르게 하기위해서 Next.js 처럼 서버가 첫 렌더를 먼저 그려주고 `hydration`으로 이벤트를 입히는 방법을 흔히 쓰게 된다. 하지만 렌더가 되서 보이긴 하더라도 `hydration` 작업 중에 `TTI`가 늦어져서 사용자는 정작 동작을 못하는 문제가 생길 수 있는데 `Progressive Hydration` 을 이용하면 된다. `Progressive Hydration`은 `InteractionObserver`를 이용해서 보이는 컴포넌트 부터 `Hydration`을 진행하는 방법을 말한다.
 
 - `micro-optimizations` 과 `progressive booting`
   SSR 로 첫 의미있는 화면을 최대한 빨리 그리고 최소한의 JS로 TTI도 빠르게 하는 방법이다. 세부적인 동작들에 필요한 JS 코드들은 `LazyLoad`되고 실행되도록 한다. 실행은 비동기적로 분리적으로 하고 `requestIdleCallback` 필요하다면 이용 될 수 있다. (참고 : [When everything's important, nothing is](https://aerotwist.com/blog/when-everything-is-important-nothing-is/))

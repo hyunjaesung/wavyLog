@@ -44,9 +44,9 @@ const Main = () => {
 
   const categories = {
     Essay: [],
-    [`Deep Dive`]: [],
+    [`Deep-Dive`]: [],
     Book: [],
-    [`Brief Dive`]: [],
+    [`Brief-Dive`]: [],
   };
 
   nodes.forEach(({frontmatter: {category, date, title, icon} = {}, id, slug}) => {
