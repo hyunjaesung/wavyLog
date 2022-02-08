@@ -21,7 +21,7 @@ const BlogPost = ({
     <Layout>
       <GatsbySeo
         title={`${title} | Stevy's wavyLog`}
-        description={`Stevy의 개발 블로그 입니다.`}
+        // description={`Stevy의 개발 블로그 입니다.`}
         openGraph={{
           title,
           url: `${meta.siteMetadata.siteUrl}/${slug}`,
