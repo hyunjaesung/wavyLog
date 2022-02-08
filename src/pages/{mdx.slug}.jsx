@@ -2,15 +2,13 @@ import * as React from 'react';
 import {graphql} from 'gatsby';
 import {MDXRenderer} from 'gatsby-plugin-mdx';
 import Layout from '../components/Layout';
-import { GatsbySeo } from 'gatsby-plugin-next-seo';
+import {GatsbySeo} from 'gatsby-plugin-next-seo';
 import AboutMe from '../components/AboutMe';
 
 const BlogPost = ({
   data: {
-    allSite:{
-      nodes:[
-        meta
-      ]
+    allSite: {
+      nodes: [meta],
     },
     mdx: {
       slug,
@@ -22,23 +20,23 @@ const BlogPost = ({
   return (
     <Layout>
       <GatsbySeo
-              title={`${title} | Stevy's wavyLog`}
-              openGraph={{
-                title,
-                url:`${meta.siteMetadata.siteUrl}/${slug}`
-              }}
-            />
-      {
-        category === 'Resume' ? (<AboutMe title={title} body={body}/>) : (
-          <>
-            <section className="post">
-              <h1 className="title">{title}</h1>
-              <p className="date">{date}</p>
-              <MDXRenderer>{body}</MDXRenderer>
-            </section>
-          </>
-        )
-      }
+        title={`${title} | Stevy's wavyLog`}
+        openGraph={{
+          title,
+          url: `${meta.siteMetadata.siteUrl}/${slug}`,
+        }}
+      />
+      {category === 'Resume' ? (
+        <AboutMe title={title} body={body} />
+      ) : (
+        <>
+          <section className="post">
+            <h1 className="title">{title}</h1>
+            <p className="date">{date}</p>
+            <MDXRenderer>{body}</MDXRenderer>
+          </section>
+        </>
+      )}
     </Layout>
   );
 };
