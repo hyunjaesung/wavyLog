@@ -131,7 +131,12 @@ a {
   outline: none;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
+  overflow-x: hidden;
   background-color: #2e3437;
   color: white;
   display: flex;
