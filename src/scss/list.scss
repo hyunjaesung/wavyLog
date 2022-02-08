@@ -5,6 +5,7 @@
     opacity: 0.7;
   }
   width: 100%;
+  max-width: 1000px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -46,8 +47,8 @@
 @media (max-width: 600px) {
   .list {
     grid-template-columns: 1fr;
-    padding: 0px;
-    width: 100vw;
+    width: 95vw;
+    margin-top: 20px;
     .category-list-wrapper {
       .list_title {
         span {
