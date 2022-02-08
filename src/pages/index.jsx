@@ -64,7 +64,7 @@ const Main = () => {
 
   return (
     <Layout>
-      <GatsbySeo title={`Stevy's wavyLog`} />
+      <GatsbySeo title={`Stevy's wavyLog`} description={`Stevy의 개발 블로그 입니다.`} />
       <section className="list">
         {Object.entries(categories).map(([key, value]) => (
           <ListWrapper key={key}>
