@@ -132,15 +132,15 @@ module.exports = {
             return {
               url: path,
               lastmod: modifiedTime,
-              changefreq: `monthly`,
+              changefreq: `weekly`,
               priority: 0.9,
             };
           }
           return {
             url: path,
             lastmod: path === '/' ? new Date() : null,
-            changefreq: path === '/' ? 'weekly' : `monthly`,
-            priority: path === '/' ? 0.9 : 0.7,
+            changefreq: 'weekly',
+            priority: 0.9,
           };
         },
       },
