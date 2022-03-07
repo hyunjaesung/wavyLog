@@ -168,6 +168,14 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://www.stevy.dev',
+        sitemap: 'https://www.stevy.dev/sitemap.xml',
+        policy: [{userAgent: '*', allow: '/'}],
+      },
+    },
     `gatsby-plugin-sass`,
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
