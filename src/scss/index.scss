@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&&family=Noto+Sans+KR:wght@400;500;700&family=Yellowtail&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rock+Salt&&family=Noto+Sans+KR:wght@400;500;700&family=Yellowtail&display=swap");
 
 // html,
 // body,
@@ -136,7 +136,7 @@ body {
   color: white;
   display: flex;
   justify-content: center;
-  font-family: 'Noto Sans KR';
+  font-family: "Noto Sans KR";
   font-size: 1.4rem;
   font-weight: 300;
   padding: 0px;
@@ -168,8 +168,12 @@ footer {
   align-items: center;
 }
 
-@import './codeblock.scss';
-@import './header.scss';
-@import './list.scss';
-@import './post.scss';
-@import './resume.scss';
+@import "./codeblock.scss";
+@import "./header.scss";
+@import "./list.scss";
+@import "./post.scss";
+@import "./resume.scss";
+
+img {
+  max-width: 100%;
+}

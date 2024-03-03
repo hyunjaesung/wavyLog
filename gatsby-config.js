@@ -1,6 +1,6 @@
 const title = `Stevy's wavyLog`;
 const description = `Stevy의 개발 블로그 입니다.`;
-const thumbnail = '/thumbnail.png';
+const thumbnail = "/thumbnail.png";
 const siteUrl = `https://www.stevy.dev`;
 
 module.exports = {
@@ -9,33 +9,33 @@ module.exports = {
     titleTemplate: "%s | Stevy's wavyLog",
     siteUrl: siteUrl,
     description: description,
-    author: 'hyunjaesung',
+    author: "hyunjaesung",
     image: thumbnail,
   },
   plugins: [
     {
-      resolve: 'gatsby-plugin-manifest', // PWA
+      resolve: "gatsby-plugin-manifest", // PWA
       options: {
         name: `Stevy's wavyLog`,
-        short_name: 'wavyLog',
-        start_url: '/',
+        short_name: "wavyLog",
+        start_url: "/",
         background_color: `#2e3437`,
         theme_color: `#2e3437`,
-        display: 'standalone',
-        icon: 'src/images/profile.jpeg',
+        display: "standalone",
+        icon: "src/images/profile.jpeg",
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'images',
+        name: "images",
         path: `${__dirname}/src/images/`,
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'pages',
+        name: "pages",
         path: `${__dirname}/src/pages/`,
       },
     },
@@ -47,26 +47,20 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-transformer-remark",
-      options: {
-          plugins: ["gatsby-remark-gifs"],
-      },
-    },
-    {
       resolve: `gatsby-plugin-mdx`,
-      extensions: ['mdx', 'md'],
+      extensions: ["mdx", "md"],
       options: {
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
-              classPrefix: 'language-',
+              classPrefix: "language-",
               inlineCodeMarker: null, // `~`에 대한 오지랖
               aliases: {
-                js: 'javascript',
-                ts: 'typescript',
-                py: 'python',
-                kt: 'kotlin',
+                js: "javascript",
+                ts: "typescript",
+                py: "python",
+                kt: "kotlin",
               },
               showLineNumbers: true,
               noInlineHighlight: true,
@@ -79,11 +73,12 @@ module.exports = {
               linkImagesToOriginal: false,
             },
           },
+          "gatsby-remark-gifs",
         ],
       },
     },
     {
-      resolve: 'gatsby-plugin-sitemap',
+      resolve: "gatsby-plugin-sitemap",
       options: {
         query: `
           {
@@ -107,19 +102,22 @@ module.exports = {
 
         resolveSiteUrl: () => siteUrl,
 
-        resolvePages: ({allSitePage: {nodes: allPages}, allMdx: {nodes: allBlogPostPages}}) => {
+        resolvePages: ({
+          allSitePage: { nodes: allPages },
+          allMdx: { nodes: allBlogPostPages },
+        }) => {
           const wpNodeMap = allBlogPostPages.reduce((acc, node) => {
             const {
-              parent: {modifiedTime},
+              parent: { modifiedTime },
               slug,
             } = node;
             const uri = `/${slug}`;
-            acc[uri] = {modifiedTime};
+            acc[uri] = { modifiedTime };
 
             return acc;
           }, {});
 
-          return allPages.map(page => {
+          return allPages.map((page) => {
             return {
               ...page,
               ...wpNodeMap[page.path],
@@ -129,11 +127,11 @@ module.exports = {
 
         excludes: [],
 
-        filterPages: ({path}, excludedRoute) => {
+        filterPages: ({ path }, excludedRoute) => {
           return path.startsWith(excludedRoute);
         },
 
-        serialize: ({path, modifiedTime}) => {
+        serialize: ({ path, modifiedTime }) => {
           if (modifiedTime) {
             return {
               url: path,
@@ -144,47 +142,47 @@ module.exports = {
           }
           return {
             url: path,
-            lastmod: path === '/' ? new Date() : null,
-            changefreq: 'weekly',
+            lastmod: path === "/" ? new Date() : null,
+            changefreq: "weekly",
             priority: 0.9,
           };
         },
       },
     },
     {
-      resolve: 'gatsby-plugin-next-seo',
+      resolve: "gatsby-plugin-next-seo",
       options: {
-        language: 'ko',
+        language: "ko",
         openGraph: {
           title: title,
           titleTemplate: `%s | Stevy's wavyLog`,
           description: description,
-          type: 'website',
-          locale: 'ko_KR',
+          type: "website",
+          locale: "ko_KR",
           url: siteUrl,
-          site_name: 'stevydev',
+          site_name: "stevydev",
           images: [
             {
               url: thumbnail,
               width: 800,
               height: 400,
-              alt: 'stevydev site main image',
+              alt: "stevydev site main image",
             },
           ],
         },
       },
     },
     {
-      resolve: 'gatsby-plugin-robots-txt',
+      resolve: "gatsby-plugin-robots-txt",
       options: {
-        host: 'https://www.stevy.dev',
-        sitemap: 'https://www.stevy.dev/sitemap.xml',
-        policy: [{userAgent: '*', allow: '/'}],
+        host: "https://www.stevy.dev",
+        sitemap: "https://www.stevy.dev/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/" }],
       },
     },
     `gatsby-plugin-sass`,
-    'gatsby-plugin-image',
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+    "gatsby-plugin-image",
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
   ],
 };
