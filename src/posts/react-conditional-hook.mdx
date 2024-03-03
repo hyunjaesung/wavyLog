@@ -8,7 +8,7 @@ category: 'Brief-Dive'
 
 상태에 따라서 조건 부로 React Hook을 실행 시키고 싶었던 적이 있었을 것이다. 이런 경우 기대보다 적은 hooks를 실행 시켰다는 에러를 만나게 된다.
 
-![에러](./images/Pasted image 20240303154954.png)
+![에러](./images/Pastedimage20240303154954.png)
 
 조건부로 hooks 를 사용할 수 없다는 단순한 규칙이지만 여러가지 상황을 만날 수 있다.
 
@@ -132,7 +132,7 @@ export default function App() {
 
 ```
 
-![에러예제](./images/Pasted image 20240303173801.png)
+![에러예제](./images/Pastedimage20240303173801.png)
 
 일반적으로 에러로 인해 해당 상황의 재현은 어렵지만 가상의 예제를 들면 위와 같은 형태가 될 것이다. Fiber 구조에서 useState가 생성한 값들의 존재는 항상 보장되어 있기 때문에 컴포넌트의 재호출시 해당 useState를 첫번째 호출과 달리 호출하지 않으면 hooks들로 Fiber 내부에 생성한 상태 리스트가 꼬이게 된다.
 
