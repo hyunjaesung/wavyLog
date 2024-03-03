@@ -131,7 +131,7 @@ export default function App() {
 
 ```
 
-![에러예제](./images/Pasted image 20240303221455.png)
+![에러예제](./images/Pastedimage20240303221455.png)
 
 일반적으로 에러로 인해 해당 상황의 재현은 어렵지만 가상의 예제를 들면 위와 같은 형태가 될 것이다. Fiber 구조에서 useState가 생성한 값들의 존재는 항상 보장되어 있기 때문에 컴포넌트의 재호출시 해당 useState를 첫번째 호출과 달리 호출하지 않으면 hooks들로 Fiber 내부에 생성한 상태 리스트가 꼬이게 된다.
 
