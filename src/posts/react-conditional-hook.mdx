@@ -95,6 +95,8 @@ export default function App() {
 
 ![실행예제2](./images/condition2.gif)
 
+위와 같이 useContext의 경우 문제없이 사용가능하다. 곧 리액트 최신 버전에 추가될 내장 Hook인 use 같은 경우도 문제 없이 조건부로 사용이 가능하다고 한다.
+
 ### 왜 이런 규칙이 생겼을까
 
 React는 Fiber로 불리우는 가상의 DOM 노드들이 합쳐진 연결 리스트를 가지고 화면을 그린다. React Hook은 단순히 함수이기에 함수를 조건적으로 실행해서 사이드 이펙트를 만드는 것도 가능하다고 생각하겠지만 특정 내장 Hook 들을 사용한 경우는 어렵다.
