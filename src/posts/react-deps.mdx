@@ -7,7 +7,7 @@ category: 'Brief-Dive'
 
 최근 동료 분이 useEffect의 의존성 배열에는 useRef의 값이 들어가면 안된다고 코드 리뷰를 해주셨다. 하지만 분명 useRef의 current값이 들어갈 때와 안 들어갈 때가 차이가 있었다. 그 차이를 인식하고 해당 방법으로 구현을 했기에 혼란스러웠다. 아래 예제를 보자
 
-### 예제 1. useRef 값을 의존성 배열에 넣어서 생긴 차이
+### useRef 값을 의존성 배열을 넣으면 분명 차이가 있긴하다
 
 ```jsx
 import React, { useState, useRef, useEffect } from 'react'
@@ -61,7 +61,7 @@ export default App
 
 React는 Hook의 의존성 배열에 다시 렌더링을 trigger시키는 값만 넣도록 권고하고 있다. 화면을 그리는데 있어서 큰 이슈를 유발 하는 것은 아니라 Error는 내보내고 있지 않지만 추적되기 어려운 사이드 이펙트를 만들 수 있기 때문에 trigger를 유발하지 않는 값을 의존성 배열에 넣는 것은 지양하도록 권하고 있다.
 
-### 예제 2. useRef 값을 의존성 배열에 넣고 싶은 경우
+### 그럼에도 useRef 값을 의존성 배열에 넣고 싶은 경우에는 어떻게 할까
 
 ```jsx
 
@@ -118,7 +118,9 @@ export default App
 
 ![예제4](./images/def2-example2.gif)
 
-이를 리액트가 권고하는 방법으로 다시 쓴다면 useRef 쓰는 부분을 재호출을 trigger하는 useState로 바꿔서 쓰면 된다.
+이를 리액트가 권고하는 방법으로 다시 써보자 간단히 useRef 쓰는 부분을 재호출을 trigger하는 useState로 바꿔서 쓰면 된다.
+
+setState 함수를 컴포넌트에 ref props에 넣으면 해당 컴포넌트가 mount될때 ref에 있는 콜백을 호출해준다. 간단하게 setState 함수만 전달해도 좋다
 
 ```jsx
 
