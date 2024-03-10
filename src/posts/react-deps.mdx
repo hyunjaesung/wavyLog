@@ -33,7 +33,8 @@ const App = () => {
 export default App
 
 ```
-!(예제1)[./images/def-example1.gif]
+
+![예제1](./images/def-example1.gif)
 
 ```jsx
 
@@ -53,7 +54,7 @@ export default App
 
 
 ```
-!(예제2)[./images/def-example2.gif]
+![예제2](./images/def-example2.gif)
 
 
 위 예제와 같이 useRef를 의존성 배열에 넣은 경우에는 다른 trigger에 의해 해당 컴포넌트가 재호출 되었을 때 useRef를 의존성 배열에 넣은 effect가 실행이 된다. 반면, 의존성 배열에 넣지 않은 effect는 실행되지 않는다. 분명 동작의 차이는 있다. 하지만 이것은 React가 바라지 않는 사이드 이펙트다. 
@@ -110,12 +111,12 @@ const App = () => {
 export default App
 
 ```
-!(예제3)[./images/def2-example1.gif]
+![예제3](./images/def2-example1.gif)
 
 
 위의 예제 같은 경우에는 ref.current가 의존성 배열에 있어야 원하는 사이드 이펙트가 생기는 예제이다. setState -> setTitle -> ref.current 변경으로 이어지는 과정으로 API호출이 완료되고 title이 설정되면 스타일 변경을 해서 원하는 렌더를 만들어낸다. 의존성 배열에 없다면 아래와 같이 style이 바뀌지 않는다.
 
-!(예제4)[./images/def2-example2.gif]
+![예제4](./images/def2-example2.gif)
 
 이를 리액트가 권고하는 방법으로 다시 쓴다면 useRef 쓰는 부분을 재호출을 trigger하는 useState로 바꿔서 쓰면 된다.
 
