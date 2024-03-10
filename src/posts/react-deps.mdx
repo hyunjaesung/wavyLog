@@ -168,7 +168,7 @@ export default App
 ```
 
 ### react-hooks eslint룰을 사용하자
-해당 사이드 이펙트는 에러를 유발하지 않기 때문에 eslint룰에 초대를 해야 한다. 나의 실수가 작성중이 아닌 코드 리뷰에서 발견된 것도 react-hook eslint 룰을 설정 해놓지 않기 때문에 그렇게 되었다. 해당 룰을 사용하게 되면 useRef값을 의존성 배열로 쓰게 되었을 때 react-hooks/exhaustive-deps 경고 혹은 에러 (설정에 따라 다르다) 를 만날 수 있을 것이다.
+해당 사이드 이펙트는 에러를 유발하지 않기 때문에 개발 중에 헤당 상황을 피하려면 eslint 룰에 추가가 필요하다. 나의 실수가 작성중이 아닌 코드 리뷰에서 발견된 것도 react-hook eslint 룰을 설정 해놓지 않기 때문에 그렇게 되었다. 해당 룰을 사용하게 되면 useRef값을 의존성 배열로 쓰게 되었을 때 react-hooks/exhaustive-deps 경고 혹은 에러 (설정에 따라 다르다) 를 만날 수 있을 것이다.
 
 ### 정리
 - React Hook의 의존성 배열에는 재렌더를 유발하는 상태만 넣자
