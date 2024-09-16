@@ -139,6 +139,103 @@ export default function App() {
 
 useContext의 경우는 어떻게 조건적으로 쓸수 있는 것일까? useContext의 경우는 전역 상태이기 때문에 Fiber 내부에서 순서 의존적인 형태로 존재하지 않는다. 그렇기 때문에 조건적으로 사용되도 Fiber 내부의 데이터 구조에 영향을 끼치지 않는다.
 
+### 참고 : 그래도 훅을 조건부로 쓰고 싶다면 방법이 있다
+
+리액트에서 조건부로 훅을 쓰는 건 어렵지만 컴포넌트는 조건부로 쓰는게 가능하다, 예제를 보자
+
+```jsx
+import React, { useEffect, useState, useLayoutEffect } from "react";
+
+const CustomHookWithUseEffect = () => {
+  useEffect(() => {
+    console.log("useCustomHookWithUseEffect"); // 훅의 로직만 내부에서 사용
+  }, []);
+
+  return null; // 아무것도 반환하지 않는 컴포넌트 생성
+};
+
+const CustomHookWithUseState = () => {
+  const [value, setValue] = useState(0);
+
+  return null
+};
+
+const CustomHookWithUseLayoutEffect = () => {
+  useLayoutEffect(() => {
+    console.log("useCustomHookWithUseLayoutEffect");
+  }, []);
+
+  return null
+};
+
+function App() {
+  const [on, setOn] = useState(true);
+  const toggle = () => setOn(!on);
+
+  return (
+    <div className="App">
+      <h1>안녕 리액트 훅</h1>
+      <button onClick={toggle}>{on ? "ON" : "OFF"}</button>
+      {
+        on && ( // 정상 작동
+          <>
+            <CustomHookWithUseEffect/>
+            <CustomHookWithUseState/>
+            <CustomHookWithUseLayoutEffect/>
+          </>
+        )
+      }
+    </div>
+  );
+}
+```
+
+이 방법이 완벽한 해법이 되지 않을 수 도 있겠지만 훅의 사용 이유를 도메인 로직의 추상화라고 생각했을 때는 충분히 고려할 만한 설계 방법이 될 수 있다. 내가 contentEditable 요소를 다뤄야 할 때 자주 쓰는 Lexical의 경우에도 이런 설계 방법을 많이 보여준다.
+
+```jsx
+<LexicalComposer initialConfig={initialConfig}>
+  <PlainTextPlugin
+    contentEditable={<ContentEditable />}
+    placeholder={<div>Enter some text...</div>}
+  />
+  <HistoryPlugin />
+  <OnChangePlugin onChange={onChange} />
+  ...
+</LexicalComposer>
+```
+
+```jsx
+export function OnChangePlugin(...) {
+  const [editor] = useLexicalComposerContext();
+
+  useLayoutEffect(() => {
+    if (onChange) {
+      return editor.registerUpdateListener(
+        ({editorState, dirtyElements, dirtyLeaves, prevEditorState, tags}) => {
+          if (
+            (ignoreSelectionChange &&
+              dirtyElements.size === 0 &&
+              dirtyLeaves.size === 0) ||
+            (ignoreHistoryMergeTagChange && tags.has('history-merge')) ||
+            prevEditorState.isEmpty()
+          ) {
+            return;
+          }
+
+          onChange(editorState, editor, tags);
+        },
+      );
+    }
+  }, [editor, ignoreHistoryMergeTagChange, ignoreSelectionChange, onChange]);
+
+  return null; // 아무것도 반환하지 않는 컴포넌트 생성
+}
+```
+
+https://lexical.dev/docs/react/plugins
+
+위와 같이 컴포넌트를 이용해서 비즈니스 로직을 분리하고 실제 렌더되는 jsx요소들은 반환하지 않고 있다. 컴포넌트를 일종의 DI 컨테이너처럼 쓸수 있는 유용한 방법 같다. 훅이 아니라 컴포넌트이기에 조건부로 해당 플러그인을 쓸지 정할 수 도 있다.
+
 ### 참고
 
 [You Can’t Use Hooks Conditionally… or Can You?](https://portal.gitnation.org/contents/you-cant-use-hooks-conditionally-or-can-you)
