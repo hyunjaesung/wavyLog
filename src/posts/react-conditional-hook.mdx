@@ -61,7 +61,7 @@ export default function App() {
 
 ![실행예제1](./images/condition.gif)
 
-### useContext는 조건부로 사용이 가능하다 (사실 가능하지 않다고함)
+### useContext는 조건부로 사용이 가능하다 (되지만 규칙 위반임)
 
 ```jsx
 
@@ -95,9 +95,14 @@ export default function App() {
 
 ![실행예제2](./images/condition2.gif)
 
-~~위와 같이 useContext의 경우 문제없이 사용가능하다. 곧 리액트 최신 버전에 추가될 내장 Hook인 use 같은 경우도 문제 없이 조건부로 사용이 가능하다고 한다.~~
+위와 같이 useContext의 경우 문제없이 사용가능하다. 곧 리액트 최신 버전에 추가될 내장 Hook인 use 같은 경우도 문제 없이 조건부로 사용이 가능하다고 한다 (https://ko.react.dev/reference/react/use#reading-context-with-use)
 
-위 코드에서는 렌더 사이클상 에러를 내지 않고 있을 뿐 useContext를 조건부를 쓰는 것도 규칙 위반이라고 한다. 최근 나온 useContext의 대체인 use는 조건부 사용이 가능하다고 한다 (https://ko.react.dev/reference/react/use#reading-context-with-use)
+위 코드에서는 렌더 사이클상 에러를 내지 않고 있을 뿐 useContext를 조건부를 쓰는 것도 규칙 위반이라고 한다. 
+
+> useContext를 조건부로 쓰여도 에러가 나지 않는 이유 : 
+> 일반 Hook (useState, useEffect, 등)은 Fiber에 직접 저장되는 데이터가 있어서,호출 순서가 어긋나면 React가 헷갈린다. (→ 무조건 최상단에서 호출해야 함)
+> 반면, useContext는 Fiber에 별도의 상태를 저장하지 않고, Context 값을 읽기만 한다. (읽기만 할 뿐 관리하지 않는다)
+> [참고](https://gitnation.com/contents/you-cant-use-hooks-conditionally-or-can-you)
 
 ### 왜 이런 규칙이 생겼을까
 
