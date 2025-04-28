@@ -61,7 +61,7 @@ export default function App() {
 
 ![실행예제1](./images/condition.gif)
 
-### useContext는 조건부로 사용이 가능하다
+### useContext는 조건부로 사용이 가능하다 (사실 가능하지 않다고함)
 
 ```jsx
 
@@ -95,7 +95,9 @@ export default function App() {
 
 ![실행예제2](./images/condition2.gif)
 
-위와 같이 useContext의 경우 문제없이 사용가능하다. 곧 리액트 최신 버전에 추가될 내장 Hook인 use 같은 경우도 문제 없이 조건부로 사용이 가능하다고 한다.
+~~위와 같이 useContext의 경우 문제없이 사용가능하다. 곧 리액트 최신 버전에 추가될 내장 Hook인 use 같은 경우도 문제 없이 조건부로 사용이 가능하다고 한다.~~
+
+위 코드에서는 렌더 사이클상 에러를 내지 않고 있을 뿐 useContext를 조건부를 쓰는 것도 규칙 위반이라고 한다. 최근 나온 useContext의 대체인 use는 조건부 사용이 가능하다고 한다 (https://ko.react.dev/reference/react/use#reading-context-with-use)
 
 ### 왜 이런 규칙이 생겼을까
 
